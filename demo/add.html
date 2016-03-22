@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" />
+        
+        <script type="text/javascript" src="../src/jquery-1.11.3.js"></script>
+        <title>add() function</title>
+    </head>
+    <body>       
+      <div>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      
+    </body>
+
+    <script type="text/javascript">
+    //add() creates a new jQuery Object with  element added to the set of matched elements.
+      jQuery.fn.extend({ 
+          addElement: function(element){
+            var selector = this.get(); //get the selector in array
+            var selectorInString = this.selector; // get the selector in string
+            selector.push(($.parseHTML(element)[0]));
+            console.log(selector);
+            //return selector + ""
+            return selector;
+          }
+        });
+      $("ul").add( "li" ); //the selected collection of jQuery Object was "ul" firstly and then added a "li" after add("li"), that means the selected collection is "ul li" now
+      $("ul").addElement("li");
+      
+        
+      
+    </script>
+</html>
