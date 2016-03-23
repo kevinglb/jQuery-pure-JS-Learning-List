@@ -1,0 +1,17 @@
+html,body{
+  padding: 0;
+  margin: 0 auto;
+}
+*, *:after, *:before{
+  box-sizing: border-box;
+}
+.container{
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 30px; 
+}
+.container.margined{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}

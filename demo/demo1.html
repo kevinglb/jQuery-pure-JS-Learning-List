@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" />
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <script type="text/javascript" src="../src/jquery-1.11.3.js"></script>
+        <title>add() function</title>
+    </head>
+    <body>       
+      <div class="container margined">
+        <h2> add() function</h2>
+        <p>add() creates a new jQuery Object with  element added to the set of matched elements.</p>
+
+        <p>below is an empty "ul" with three empty "li" inside</p> 
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+        <p>while after the script</p>
+        <code>$("ul").add( "li" ).css("background-color","red");</code>
+        <ul >
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <p>the selected collection of jQuery Object was "ul" firstly and then added a "li" after add("li"), that means the selected collection is "ul li" now</p>
+        <script type="text/javascript">
+        $("ul").add( "li" ).css("background-color","red");
+        </script>
+      </div>
+      
+      <div class="container margined">
+        <h2>after() vs before() vs append() vs appendTo()</h2>
+        <p>after(): Insert content, specified by the parameter, after each element in the set of matched elements.</p>
+        <p>before(): Insert content, specified by the parameter, before each element in the set of matched elements.</p>
+        <p>append(): Insert content, specified by the parameter, to the end of each element in the set of matched elements.</p>
+        <p>appendTo(): Insert every element in the set of matched elements to the end of the target.</p>
+        <h3>Difference between after() and before()</h3>
+        <p>It is clear that both functions add the parameter elements to the matched elements, the only difference is the position that the parameter of after() will be added after the matched elements while the parameter of before is added before the metched elements </p>
+        <h3>Difference between after() and append()</h3>
+        <p>That means the difference is that the after() will add the parameter after the target element, while the append() will add the parameter element inside the target element and as its last childElement</p>
+        <h3>Difference between append() and appendTo()</h3>
+        <p>The difference between both functions is that the target elememnts and the element to be added are used in opposite way. In append(), the parameter is the element to be added and the caller is the target element, but in appendTo(), the caller is the element to be added and the parameter is the target element. The order of the added element of these two functions depends on the functions called order.</p>
+        <code>
+          $("div.outer").before("<span>before</span>");<br/>
+          $("div.outer").after("<span>after</span>");<br/>
+          $("div.outer").append("<span>append</span>");<br/>
+          $("<span>appendTo</span>").appendTo($("div.outer"));<br/>
+        </code>
+         <div class="outer">
+          div.outer
+          <div class="inner">div.inner</div>
+          
+        </div>
+        <br/><p>So technically, if both after() and append() are called to the same elenment, the parameter of append() will be add into the target but the one of after() will be added after the target element.</p>
+        <p>The append() is called before appendTo(), so the result is that the parameter if append() is ahead of the appendTo()'s caller element</p>
+        <script type="text/javascript">
+         $("div.outer").before("<span>before</span>");
+        $("div.outer").after("<span>after</span>");
+        $("div.outer").append("<span>append</span><br/>");
+         $("<span>appendTo</span>").appendTo($("div.outer"));
+
+        </script>
+      </div>
+
+      <div class="container margined">
+        <h2></h2>
+      </div>
+    </body>
+
+    <script type="text/javascript">
+    
+      jQuery.fn.extend({ 
+          addElement: function(element){
+            var selector = this.get(); //get the selector in array
+            var selectorInString = this.selector; // get the selector in string
+            selector.push(($.parseHTML(element)[0]));
+            console.log(selector);
+            //return selector + ""
+            return selector;
+          }
+        });
+      //add() creates a new jQuery Object with  element added to the set of matched elements.
+      $("ul").add( "li" ); //the selected collection of jQuery Object was "ul" firstly and then added a "li" after add("li"), that means the selected collection is "ul li" now
+      $("ul").addElement("li");
+      $("li").add(document.createElement("p"));
+        
+      
+    </script>
+</html>
